@@ -10,9 +10,8 @@ const iconMap = {
 
 export default function BottomNav({ currentPath, routes, onNavigate }) {
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30">
-      <div className="mx-auto w-full max-w-[480px] px-4 pb-[calc(10px+env(safe-area-inset-bottom))]">
-        <nav className="pointer-events-auto relative overflow-hidden rounded-[28px] border border-white/65 bg-[rgba(252,249,243,0.86)] p-2 shadow-[0_20px_60px_rgba(93,72,51,0.12)] backdrop-blur-2xl dark:bg-[rgba(28,30,26,0.86)]">
+    <div className="sticky bottom-0 left-0 right-0 z-20 px-3 pb-[calc(10px+env(safe-area-inset-bottom))] pt-4">
+      <nav className="relative overflow-hidden rounded-[28px] border border-white/65 bg-[rgba(252,249,243,0.86)] p-2 shadow-[0_20px_60px_rgba(93,72,51,0.12)] backdrop-blur-2xl dark:bg-[rgba(28,30,26,0.86)]">
         <div className="grid grid-cols-4 gap-1">
           {routes.map((route) => {
             const isActive = currentPath === route.path;
@@ -42,8 +41,7 @@ export default function BottomNav({ currentPath, routes, onNavigate }) {
             );
           })}
         </div>
-        </nav>
-      </div>
+      </nav>
     </div>
   );
 }
