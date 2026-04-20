@@ -8,13 +8,13 @@ import {
   LineChart,
   Pie,
   PieChart,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
 import { useState } from "react";
 
+import ChartSurface from "../components/ChartSurface";
 import EmptyState from "../components/EmptyState";
 import SectionCard from "../components/SectionCard";
 import { useAppStore } from "../hooks/useAppStore";
@@ -143,9 +143,9 @@ export default function InsightsPage() {
                 );
               })}
             </div>
-            <div className="h-56">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={frequencyChart} barGap={10}>
+            <ChartSurface className="h-56">
+              {({ width, height }) => (
+                <BarChart width={width} height={height} data={frequencyChart} barGap={10}>
                   <XAxis
                     dataKey="label"
                     axisLine={false}
@@ -158,8 +158,8 @@ export default function InsightsPage() {
                   <Tooltip content={<BasicTooltip />} cursor={{ fill: "rgba(111,157,102,0.08)" }} />
                   <Bar dataKey="count" radius={[14, 14, 6, 6]} fill="#7fab6e" animationDuration={780} />
                 </BarChart>
-              </ResponsiveContainer>
-            </div>
+              )}
+            </ChartSurface>
           </>
         ) : (
           <EmptyState
@@ -177,9 +177,9 @@ export default function InsightsPage() {
               <Waves className="h-4 w-4 text-[var(--accent)]" />
               一周趋势
             </div>
-            <div className="h-44">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={weekdayChart}>
+            <ChartSurface className="h-44">
+              {({ width, height }) => (
+                <LineChart width={width} height={height} data={weekdayChart}>
                   <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: "var(--muted)", fontSize: 11 }} />
                   <YAxis allowDecimals={false} axisLine={false} tickLine={false} tick={{ fill: "var(--muted)", fontSize: 11 }} width={26} />
                   <Tooltip content={<BasicTooltip />} />
@@ -193,15 +193,15 @@ export default function InsightsPage() {
                     animationDuration={820}
                   />
                 </LineChart>
-              </ResponsiveContainer>
-            </div>
+              )}
+            </ChartSurface>
           </div>
 
           <div className="rounded-[24px] bg-[var(--surface-soft)] p-3">
             <div className="mb-3 text-sm font-medium text-[var(--ink)]">常见排便时段</div>
-            <div className="h-44">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+            <ChartSurface className="h-44">
+              {({ width, height }) => (
+                <PieChart width={width} height={height}>
                   <Pie
                     data={timeDistribution}
                     dataKey="value"
@@ -217,8 +217,8 @@ export default function InsightsPage() {
                   </Pie>
                   <Tooltip content={<BasicTooltip />} />
                 </PieChart>
-              </ResponsiveContainer>
-            </div>
+              )}
+            </ChartSurface>
             <div className="mt-2 grid grid-cols-2 gap-2">
               {timeDistribution.map((item) => (
                 <div key={item.label} className="rounded-[18px] bg-white/70 px-3 py-2 text-xs dark:bg-white/6">

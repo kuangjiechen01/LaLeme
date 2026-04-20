@@ -362,6 +362,31 @@ textarea {
   box-shadow: 0 16px 28px rgba(111, 157, 102, 0.09);
 }
 
+.chart-surface-skeleton {
+  display: flex;
+  height: 100%;
+  align-items: end;
+  gap: 10px;
+  padding: 10px 4px 4px;
+}
+
+.chart-surface-bar {
+  flex: 1;
+  border-radius: 999px 999px 10px 10px;
+  background: linear-gradient(180deg, rgba(127, 171, 110, 0.5), rgba(127, 171, 110, 0.12));
+  animation: pulseChart 1.5s ease-in-out infinite;
+}
+
+.chart-surface-bar:nth-child(2),
+.chart-surface-bar:nth-child(5) {
+  animation-delay: 120ms;
+}
+
+.chart-surface-bar:nth-child(3),
+.chart-surface-bar:nth-child(6) {
+  animation-delay: 240ms;
+}
+
 .reminder-card {
   overflow: hidden;
 }
@@ -394,8 +419,22 @@ textarea {
   }
 }
 
+@keyframes pulseChart {
+  0%,
+  100% {
+    opacity: 0.42;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .shine-card::after {
+    animation: none;
+  }
+
+  .chart-surface-bar {
     animation: none;
   }
 

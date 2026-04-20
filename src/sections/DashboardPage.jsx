@@ -10,9 +10,10 @@ import {
   Settings2,
   ShieldCheck,
 } from "lucide-react";
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { Bar, BarChart, Tooltip, XAxis } from "recharts";
 import { useNavigate } from "react-router-dom";
 
+import ChartSurface from "../components/ChartSurface";
 import SectionCard from "../components/SectionCard";
 import { useAppStore } from "../hooks/useAppStore";
 import { formatHeroDate, formatLastRecord } from "../lib/date";
@@ -147,9 +148,9 @@ export default function DashboardPage() {
             <div className="mt-1 text-sm font-semibold text-[var(--ink)]">{summary.peakBucket}</div>
           </div>
         </div>
-        <div className="h-44">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData} barGap={8}>
+        <ChartSurface className="h-44">
+          {({ width, height }) => (
+            <BarChart width={width} height={height} data={chartData} barGap={8}>
               <XAxis
                 axisLine={false}
                 tickLine={false}
@@ -171,8 +172,8 @@ export default function DashboardPage() {
                 </linearGradient>
               </defs>
             </BarChart>
-          </ResponsiveContainer>
-        </div>
+          )}
+        </ChartSurface>
       </SectionCard>
 
       <SectionCard
