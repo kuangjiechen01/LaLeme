@@ -49,6 +49,7 @@
 html,
 body,
 #root {
+  height: 100%;
   min-height: 100%;
 }
 
@@ -62,6 +63,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 body::selection {
@@ -76,21 +78,22 @@ textarea {
 
 .page-shell {
   position: relative;
-  min-height: 100vh;
-  overflow-x: hidden;
+  height: var(--app-height, 100vh);
+  min-height: var(--app-height, 100vh);
+  overflow: hidden;
 }
 
 .app-shell-container {
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: var(--app-height, 100vh);
+  min-height: var(--app-height, 100vh);
   padding-top: max(16px, env(safe-area-inset-top));
   padding-bottom: 16px;
 }
 
 .app-frame {
   display: flex;
-  height: calc(100vh - 32px);
-  min-height: calc(100vh - 32px);
+  height: calc(var(--app-height, 100vh) - 32px - max(0px, env(safe-area-inset-top)));
+  min-height: 0;
   flex-direction: column;
   overflow: hidden;
 }
@@ -101,13 +104,6 @@ textarea {
   overflow-y: auto;
   overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
-}
-
-@supports (height: 100dvh) {
-  .app-frame {
-    height: calc(100dvh - 32px - env(safe-area-inset-top));
-    min-height: calc(100dvh - 32px - env(safe-area-inset-top));
-  }
 }
 
 .ambient {
