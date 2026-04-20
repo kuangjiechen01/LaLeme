@@ -1,13 +1,11 @@
-import { lazy, Suspense } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import AppShell from "./components/AppShell";
 import ChunkErrorBoundary from "./components/ChunkErrorBoundary";
-
-const DashboardPage = lazy(() => import("./sections/DashboardPage"));
-const HistoryPage = lazy(() => import("./sections/HistoryPage"));
-const InsightsPage = lazy(() => import("./sections/InsightsPage"));
-const SettingsPage = lazy(() => import("./sections/SettingsPage"));
+import DashboardPage from "./sections/DashboardPage";
+import HistoryPage from "./sections/HistoryPage";
+import InsightsPage from "./sections/InsightsPage";
+import SettingsPage from "./sections/SettingsPage";
 
 const routes = [
   { path: "/", label: "首页" },
@@ -27,20 +25,12 @@ export default function App() {
       onNavigate={navigate}
     >
       <ChunkErrorBoundary resetKey={location.pathname}>
-        <Suspense
-          fallback={
-            <div className="section-card flex min-h-[220px] items-center justify-center text-sm text-[var(--muted)]">
-              正在整理这一页的内容…
-            </div>
-          }
-        >
-          <Routes>
-            <Route path="/" element={<DashboardPage />} />
-            <Route path="/history" element={<HistoryPage />} />
-            <Route path="/insights" element={<InsightsPage />} />
-            <Route path="/settings" element={<SettingsPage />} />
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/history" element={<HistoryPage />} />
+          <Route path="/insights" element={<InsightsPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+        </Routes>
       </ChunkErrorBoundary>
     </AppShell>
   );
