@@ -56,7 +56,7 @@ export default function DashboardPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.32),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(111,157,102,0.18),transparent_42%)]" />
         <div className="relative">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--muted)]">
-            肠道小记
+            拉了么
           </p>
           <div className="mt-3 flex items-start justify-between gap-4">
             <div>

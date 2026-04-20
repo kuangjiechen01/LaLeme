@@ -11,9 +11,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "icon-192.svg", "icon-512.svg"],
       manifest: {
-        name: "肠道小记",
-        short_name: "肠道小记",
-        description: "私密记录每日排便状态，温和观察身体节律。",
+        name: "拉了么",
+        short_name: "拉了么",
+        description: "拉了么，私密记录每日排便状态，温和观察身体节律。",
         theme_color: "#f4eee2",
         background_color: "#f9f4ea",
         display: "standalone",

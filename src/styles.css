@@ -80,6 +80,36 @@ textarea {
   overflow-x: hidden;
 }
 
+.app-shell-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: max(16px, env(safe-area-inset-top));
+  padding-bottom: 16px;
+}
+
+.app-frame {
+  display: flex;
+  height: calc(100vh - 32px);
+  min-height: calc(100vh - 32px);
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-main {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@supports (height: 100dvh) {
+  .app-frame {
+    height: calc(100dvh - 32px - env(safe-area-inset-top));
+    min-height: calc(100dvh - 32px - env(safe-area-inset-top));
+  }
+}
+
 .ambient {
   position: fixed;
   z-index: 0;
