@@ -16,6 +16,27 @@
     <meta name="apple-mobile-web-app-title" content="拉了么" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>拉了么</title>
+    <script>
+      (function () {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function (registrations) {
+            registrations.forEach(function (registration) {
+              registration.unregister().catch(function () {});
+            });
+          }).catch(function () {});
+        }
+
+        if ("caches" in window) {
+          window.caches.keys().then(function (keys) {
+            return Promise.all(
+              keys.map(function (key) {
+                return window.caches.delete(key);
+              }),
+            );
+          }).catch(function () {});
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

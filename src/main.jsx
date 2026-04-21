@@ -1,11 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { registerSW } from "virtual:pwa-register";
 
 import App from "./App";
 import { AppStoreProvider } from "./hooks/useAppStore";
 import "./styles.css";
+
+function purgeLegacyOfflineData() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      registrations.forEach((registration) => {
+        registration.unregister().catch(() => null);
+      });
+    }).catch(() => null);
+  }
+
+  if ("caches" in window) {
+    window.caches.keys().then((keys) => {
+      keys.forEach((key) => {
+        window.caches.delete(key).catch(() => null);
+      });
+    }).catch(() => null);
+  }
+}
 
 window.addEventListener("vite:preloadError", (event) => {
   event.preventDefault();
@@ -26,7 +43,7 @@ window.addEventListener("pageshow", () => {
   window.sessionStorage.removeItem("bowel-buddy-preload-retried");
 });
 
-registerSW({ immediate: true });
+purgeLegacyOfflineData();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
+      injectRegister: false,
       selfDestroying: true,
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "icon-192.svg", "icon-512.svg"],
